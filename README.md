@@ -7,6 +7,8 @@ Based on my best practice, extend gorm with some frequent used functions, e.g:
 - GetOrderedList()
 - GetPageRangeList()
 
+# Blogs
+[Gorm的使用心得和一些常用扩展(一)](https://ksloveyuan.github.io/post/gorm_extension_1/)
 
 # Examples
 ## GetOne
