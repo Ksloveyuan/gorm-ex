@@ -8,7 +8,8 @@ Based on my best practice, extend gorm with some frequent used functions, e.g:
 - GetPageRangeList()
 
 # Blogs
-[Gorm的使用心得和一些常用扩展(一)](https://ksloveyuan.github.io/post/gorm_extension_1/)
+[Gorm的使用心得和一些常用扩展(一)](https://juejin.im/post/5d29988e6fb9a07efc49b612)
+[Gorm的使用心得和一些常用扩展(二)](https://juejin.im/post/5d3093625188251b2569f10e)
 
 # Examples
 ## GetOne
@@ -98,8 +99,49 @@ if err := dw.SaveOne(&instInfo); err != nil{
 ## Update
 Update partial Fields, if attrs is an object, it will ignore default value field; if attrs is map, it will ignore unchanged field.
 
+if you intent to execute below sql:
+```sql
+update test.user set description = "A programmer" where id = 1
+```
+there are 4 ways to do it:
+1. 
 ```go
-//todo: add later
+udateAttrs := User{Description: "A programmer"}
+condition := User{Id: 1}
+if err := dw.Update(&udateAttrs, condition); err != nil{
+    // error handling
+    return err
+}
+```
+2.
+```go
+udateAttrs := User{Description: "A programmer"}
+if err := dw.Update(&udateAttrs, "id = ?", 1); err != nil{
+    // error handling
+    return err
+}
+
+```
+3.
+```go
+udateAttrs := NewUpdateAttrs("test.user")
+udateAttrs["description"] = "A programmer"
+
+if err := dw.Update(&udateAttrs, "id = ?", 1); err != nil{
+    // error handling
+    return err
+}
+```
+4.
+```go
+udateAttrs := NewUpdateAttrs("test.user")
+udateAttrs["description"] = "A programmer"
+condition := User{Id: 1}
+
+if err := dw.Update(&udateAttrs, condition); err != nil{
+    // error handling
+    return err
+}
 ```
 
 ## ExecuteSql
