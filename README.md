@@ -9,6 +9,7 @@ Based on my best practice, extend gorm with some frequent used functions, e.g:
 
 # Blogs
 [Gorm的使用心得和一些常用扩展(一)](https://juejin.im/post/5d29988e6fb9a07efc49b612)
+
 [Gorm的使用心得和一些常用扩展(二)](https://juejin.im/post/5d3093625188251b2569f10e)
 
 # Examples
@@ -104,6 +105,7 @@ if you intent to execute below sql:
 update test.user set description = "A programmer" where id = 1
 ```
 there are 4 ways to do it:
+
 1. 
 ```go
 udateAttrs := User{Description: "A programmer"}
