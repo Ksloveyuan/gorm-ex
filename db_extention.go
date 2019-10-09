@@ -225,8 +225,8 @@ func (dw *DBExtension) countCore(count *int, byField string, query interface{}) 
 
 	db := dw.Table(tableName).Where(query)
 
-	if len(byField) != 0 {
-		db = db.Select(byField)
+	if byField != "" {
+		db = db.Select("count(?)", byField)
 	}
 
 	if err := db.Count(count).Error; err != nil {
